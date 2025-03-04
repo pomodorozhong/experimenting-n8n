@@ -1,0 +1,106 @@
+{
+  "name": "LM Studio",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "hi"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        180,
+        0
+      ],
+      "id": "40fdc77f-5ce1-48fc-bf6d-70824932e226",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "meta-llama-3.1-8b-instruct",
+          "mode": "list",
+          "cachedResultName": "meta-llama-3.1-8b-instruct"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        280
+      ],
+      "id": "4134100b-5eae-4200-9291-b1af6431d2ff",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "VyyvgyWS0Hu8uL5l",
+          "name": "LM Studio"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "488289d2-6057-4c1b-88e3-8bd491c7301a",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "content": "# Set Up LM Studio Connection\n\n1. Use the `OpenAI Chat Model` node.\n2. Use the server address as the API key when setting up Credential.\n3. (Note) If you're running n8n in a Docker container, use `http://host.docker.internal` instead of `http://127.0.0.1` for the server address.",
+        "height": 220,
+        "width": 760
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        260
+      ],
+      "id": "0cd578fb-7c0d-4c5d-9027-9673b6461ff9",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "47de31ce-d235-43fd-8e1d-e7573153983c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4f4d5a5c7ddb6288a2b0f4788580d01aa1f6be1f1dfd740ce82becf18fa56a34"
+  },
+  "id": "znUdwRdvTAOZ3A4t",
+  "tags": []
+}
